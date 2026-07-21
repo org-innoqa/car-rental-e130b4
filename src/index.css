@@ -121,6 +121,12 @@ button:disabled {
   color: white;
 }
 
+/* Premium limousine with chauffeur hero image */
+img[alt='Luxury Mercedes-Benz vehicle outside a modern building'] {
+  content: url('https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1400&q=90');
+  object-position: center;
+}
+
 @media (max-width: 640px) {
   html {
     scroll-behavior: auto;
