@@ -1,6 +1,6 @@
 import './index.css';
 import { useEffect, useState } from 'react';
-import { ArrowRight, CalendarDays, Check, ChevronLeft, Clock3, CreditCard, Crown, Headphones, Loader2, MapPin, Menu, Search, ShieldCheck, Sparkles, UserRound, X } from 'lucide-react';
+import { ArrowRight, CalendarDays, Check, ChevronLeft, Clock3, CreditCard, Crown, Headphones, Loader2, MapPin, Menu, Search, ShieldCheck, Sparkles, User as UserRound, X } from 'lucide-react';
 import { db } from './lib/db';
 
 type View = 'home' | 'book' | 'manage' | 'admin';
@@ -60,6 +60,7 @@ function Home({ onBook }: { onBook: () => void }) { return <main>
   <section className="border-y border-line bg-white"><div className="mx-auto grid max-w-7xl gap-8 px-5 py-14 sm:grid-cols-3 lg:px-8"><Feature icon={<Crown/>} title="Made personal" text="Your preferences are remembered and your itinerary is handled by one attentive team."/><Feature icon={<ShieldCheck/>} title="Trusted throughout" text="Clear pricing, professional chauffeurs and support whenever you need it."/><Feature icon={<Headphones/>} title="Always within reach" text="A real person is available around the clock before, during and after your journey."/></div></section>
   <section className="mx-auto max-w-7xl px-5 py-16 lg:px-8"><div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div><p className="text-xs font-semibold uppercase tracking-[.18em] text-sand">Designed around you</p><h2 className="mt-3 font-display text-3xl font-semibold tracking-tight">One standard. Every journey.</h2></div><button onClick={onBook} className="flex items-center gap-2 text-sm font-semibold">Explore the service <ArrowRight size={16}/></button></div></section>
 </main> }
+
 function Feature({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) { return <div><div className="mb-5 text-sand">{icon}</div><h3 className="font-display text-lg font-semibold">{title}</h3><p className="mt-2 max-w-xs text-sm leading-6 text-stone-500">{text}</p></div> }
 
 function BookingFlow({ step, setStep, form, update, selected, setSelected, onSubmit, loading, notice, onHome, saved }: any) {
@@ -71,6 +72,7 @@ function BookingFlow({ step, setStep, form, update, selected, setSelected, onSub
     {step === 4 && <div className="card mx-auto max-w-2xl p-7 text-center sm:p-12"><span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#e9eee7] text-green-700"><Check size={28}/></span><p className="mt-7 text-xs font-semibold uppercase tracking-[.18em] text-sand">Request received</p><h1 className="mt-3 font-display text-4xl font-semibold tracking-tight">Your journey is in good hands.</h1><p className="mx-auto mt-5 max-w-md leading-7 text-stone-500">We are checking chauffeur availability now. A member of our team will contact you within 15 minutes with confirmation and a secure payment link.</p><div className="my-8 rounded-xl bg-mist p-5 text-left"><div className="flex justify-between text-sm"><span className="text-stone-500">Reference</span><strong>{saved?.reference || 'QR-REQUEST'}</strong></div><div className="mt-3 flex justify-between text-sm"><span className="text-stone-500">Status</span><span className="font-medium text-sand">Pending approval</span></div></div><button onClick={onHome} className="rounded-lg bg-ink px-7 py-4 text-sm font-semibold text-white">Return to Qatar Rental</button></div>}
   </main>
 }
+
 function Field({ label, icon, value, onChange, placeholder, type = 'text' }: any) { return <div><label className="label">{label}</label><div className="relative"><span className="absolute left-3 top-3.5 text-stone-400">{icon}</span><input required type={type} className="input pl-10" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}/></div></div> }
 function Summary({ form, selected }: any) { return <div className="card h-fit bg-ink p-6 text-white"><p className="text-xs uppercase tracking-[.18em] text-sand">Your itinerary</p><div className="mt-6 space-y-4 text-sm"><div><p className="text-stone-400">Route</p><p className="mt-1">{form.pickup || 'Pick-up'} <span className="text-sand">→</span> {form.dropoff || 'Drop-off'}</p></div><div className="flex justify-between"><div><p className="text-stone-400">Date & time</p><p className="mt-1">{form.date || 'To be selected'} · {form.time || '—'}</p></div></div><div className="border-t border-white/15 pt-4"><p className="text-stone-400">Selected vehicle</p><p className="mt-1">{selected.name}</p></div><div className="flex items-end justify-between border-t border-white/15 pt-4"><span className="text-stone-400">Estimated total</span><strong className="text-xl">QAR {selected.price.toLocaleString()}</strong></div></div></div> }
 
