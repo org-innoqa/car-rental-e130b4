@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 813" role="img" aria-labelledby="title desc">
-  <title id="title">Qatar coverage map</title>
-  <desc id="desc">A minimal honeycomb-pattern silhouette representing Qatar.</desc>
+  <title id="title">Qatar coverage map with chauffeur service locations</title>
+  <desc id="desc">A minimal honeycomb-pattern silhouette of Qatar with pins for major chauffeur service locations.</desc>
   <rect width="1280" height="813" fill="#fff"/>
   <defs>
     <pattern id="honeycomb" width="12" height="10.4" patternUnits="userSpaceOnUse">
@@ -13,8 +13,70 @@
     <clipPath id="qatar-shape">
       <path d="M650 34c-18 2-33 10-46 24-11 12-18 28-28 42-11 15-28 22-36 39-8 16-3 34-12 49-9 15-27 21-34 38-8 18 1 35-7 52-8 16-26 25-31 42-5 17 6 31-1 48-7 16-22 24-25 42-3 18 7 30 4 47-3 17-18 28-17 46 1 16 15 26 17 41 2 16-8 31-2 46 7 16 24 23 27 40 3 16-7 30-1 45 6 15 23 22 29 37 7 17 2 34 12 49 10 15 29 20 37 36 8 16 3 32 14 45 11 13 28 18 39 30 12 12 15 29 29 37 14 8 29 2 44 8 15 6 22 21 38 25 15 4 29-3 40-13 14-12 22-28 28-45 7-19 4-39 14-55 9-15 27-23 32-40 5-17-2-34 4-50 6-17 22-28 28-44 6-17-1-34 5-50 6-16 21-26 24-43 3-17-5-31-5-47 0-17 9-32 6-48-3-17-19-25-25-41-7-15-2-32-10-47-8-14-24-20-36-31-13-12-15-30-28-40-13-10-30-8-44-15-15-7-23-23-38-30-15-7-31-2-46-7-15-5-24-19-39-23-15-4-30 3-44-1-14-4-25-16-39-19-15-3-29 2-43 9Z"/>
     </clipPath>
+    <filter id="pin-shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#151515" flood-opacity=".22"/>
+    </filter>
+    <g id="pin">
+      <path d="M0-15c-7 0-12 5-12 12 0 9 12 22 12 22S12 6 12-3C12-10 7-15 0-15Z" fill="#c5a477" stroke="#fff" stroke-width="2"/>
+      <circle cx="0" cy="-3" r="4" fill="#fff"/>
+    </g>
+    <style>
+      .location-label { font: 600 14px Inter, Arial, sans-serif; fill: #151515; }
+      .label-bg { fill: #fff; stroke: #e4e3df; stroke-width: 1; }
+    </style>
   </defs>
+
   <g clip-path="url(#qatar-shape)">
     <rect x="430" y="20" width="420" height="775" fill="url(#honeycomb)"/>
+  </g>
+
+  <g filter="url(#pin-shadow)">
+    <g transform="translate(744 302)">
+      <use href="#pin"/>
+      <rect class="label-bg" x="18" y="-22" width="61" height="27" rx="13.5"/>
+      <text class="location-label" x="30" y="-4">Lusail</text>
+    </g>
+
+    <g transform="translate(775 365)">
+      <use href="#pin"/>
+      <rect class="label-bg" x="18" y="-22" width="83" height="27" rx="13.5"/>
+      <text class="location-label" x="30" y="-4">The Pearl</text>
+    </g>
+
+    <g transform="translate(760 388)">
+      <use href="#pin"/>
+      <rect class="label-bg" x="18" y="-22" width="60" height="27" rx="13.5"/>
+      <text class="location-label" x="30" y="-4">Katara</text>
+    </g>
+
+    <g transform="translate(744 416)">
+      <use href="#pin"/>
+      <rect class="label-bg" x="18" y="-22" width="85" height="27" rx="13.5"/>
+      <text class="location-label" x="30" y="-4">West Bay</text>
+    </g>
+
+    <g transform="translate(713 438)">
+      <use href="#pin"/>
+      <rect class="label-bg" x="-103" y="-22" width="91" height="27" rx="13.5"/>
+      <text class="location-label" x="-91" y="-4">Msheireb</text>
+    </g>
+
+    <g transform="translate(768 438)">
+      <use href="#pin"/>
+      <rect class="label-bg" x="18" y="-22" width="115" height="27" rx="13.5"/>
+      <text class="location-label" x="30" y="-4">Doha Corniche</text>
+    </g>
+
+    <g transform="translate(773 510)">
+      <use href="#pin"/>
+      <rect class="label-bg" x="18" y="-22" width="175" height="27" rx="13.5"/>
+      <text class="location-label" x="30" y="-4">Hamad International</text>
+    </g>
+
+    <g transform="translate(638 456)">
+      <use href="#pin"/>
+      <rect class="label-bg" x="-125" y="-22" width="113" height="27" rx="13.5"/>
+      <text class="location-label" x="-113" y="-4">Education City</text>
+    </g>
   </g>
 </svg>

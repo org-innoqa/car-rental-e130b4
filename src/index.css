@@ -217,7 +217,7 @@ main > section:last-child:has(h2)::before {
   background-image: url('/qatar-map.svg');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   box-shadow: inset 0 0 0 1px rgba(21, 21, 21, .04);
 }
 
@@ -284,7 +284,7 @@ main > section:last-child:has(h2) > h2 {
     height: 420px;
     margin-top: 2rem;
     border-radius: 18px;
-    background-size: cover;
+    background-size: contain;
   }
 
   button {
