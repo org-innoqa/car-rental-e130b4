@@ -1,130 +1,131 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 790" role="img" aria-labelledby="title desc">
   <title id="title">Qatar chauffeur service coverage map</title>
-  <desc id="desc">A modern minimal map of Qatar showing chauffeur coverage across Hamad International Airport, Doha, West Bay, The Pearl, Lusail, Katara, Msheireb and Education City.</desc>
+  <desc id="desc">Chauffeur coverage across Qatar showing Lusail, The Pearl, West Bay, Katara, Education City, Msheireb and Hamad Airport.</desc>
   <defs>
-    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#faf9f6"/>
-      <stop offset="1" stop-color="#f1eee8"/>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfaf8"/>
+      <stop offset="1" stop-color="#f1eee9"/>
     </linearGradient>
-    <linearGradient id="qatarFill" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#252525"/>
-      <stop offset="1" stop-color="#45413c"/>
+    <linearGradient id="qatar" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ded4c3"/>
+      <stop offset=".55" stop-color="#d8cbb8"/>
+      <stop offset="1" stop-color="#cbbda9"/>
     </linearGradient>
-    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
-      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#151515" flood-opacity=".14"/>
-    </filter>
-    <filter id="pinShadow" x="-50%" y="-50%" width="200%" height="200%">
-      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#151515" flood-opacity=".22"/>
-    </filter>
-    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
-      <path d="M42 0H0V42" fill="none" stroke="#d9d4ca" stroke-width="1" opacity=".42"/>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0H0V44" fill="none" stroke="#dedbd5" stroke-width="1" opacity=".55"/>
     </pattern>
-    <g id="locationPin">
-      <circle r="12" fill="#c5a477" stroke="#fff" stroke-width="4"/>
-      <circle r="4" fill="#fff"/>
-    </g>
+    <filter id="mapShadow" x="-35%" y="-25%" width="170%" height="170%">
+      <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#817765" flood-opacity=".23"/>
+    </filter>
+    <filter id="labelShadow" x="-35%" y="-60%" width="170%" height="220%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#625b52" flood-opacity=".2"/>
+    </filter>
     <style>
-      .label { font: 600 15px Inter, Arial, sans-serif; fill: #242424; }
-      .small-label { font: 500 12px Inter, Arial, sans-serif; fill: #777169; }
-      .label-box { fill: rgba(255,255,255,.94); stroke: #ddd8cf; stroke-width: 1; }
+      .heading { font: 700 16px Inter, Arial, sans-serif; fill: #292725; }
+      .eyebrow { font: 500 12px Inter, Arial, sans-serif; fill: #6c665e; letter-spacing: 3px; }
+      .legend { font: 500 13px Inter, Arial, sans-serif; fill: #6c665e; }
+      .location { font: 700 13px Inter, Arial, sans-serif; fill: #282624; }
+      .doha { font: 500 12px Inter, Arial, sans-serif; fill: #756e65; letter-spacing: 3px; }
     </style>
+    <g id="pin">
+      <circle r="14" fill="#fffdf9" stroke="#c5a477" stroke-width="4"/>
+      <circle r="5" fill="#c5a477"/>
+    </g>
   </defs>
 
-  <rect width="1200" height="700" rx="24" fill="url(#background)"/>
-  <rect x="28" y="28" width="1144" height="644" rx="18" fill="url(#grid)"/>
+  <rect width="1280" height="790" rx="28" fill="url(#paper)"/>
+  <rect x="30" y="30" width="1220" height="730" rx="20" fill="url(#grid)" opacity=".72"/>
 
-  <g opacity=".55" fill="none" stroke="#c5a477" stroke-width="1.5" stroke-dasharray="5 9">
-    <path d="M690 140C740 220 750 300 728 365C704 438 710 510 773 590"/>
-    <path d="M650 250C722 278 778 319 826 380C864 427 876 483 870 548"/>
-    <path d="M585 458C670 431 752 427 846 450"/>
+  <g transform="translate(80 95)">
+    <text class="eyebrow" x="0" y="0">QATAR RENTAL</text>
+    <text class="heading" x="0" y="34">Chauffeur coverage across Qatar</text>
+    <circle cx="5" cy="70" r="6" fill="#c5a477"/>
+    <text class="legend" x="22" y="75">Available service locations</text>
   </g>
 
-  <g filter="url(#shadow)">
-    <path d="M623 86
-      C598 91 579 106 565 126
-      C552 145 545 169 530 188
-      C516 206 491 216 480 239
-      C469 262 479 285 469 307
-      C460 328 435 345 428 369
-      C421 394 435 414 430 438
-      C425 461 402 480 405 505
-      C408 530 429 542 437 564
-      C445 586 438 606 453 621
-      C469 638 495 633 515 643
-      C539 654 548 674 573 678
-      C598 682 614 665 633 648
-      C652 631 675 624 691 605
-      C707 585 708 559 723 540
-      C738 520 763 511 775 487
-      C786 465 779 440 791 418
-      C803 396 829 383 837 359
-      C846 333 834 312 841 287
-      C848 263 872 247 872 222
-      C872 197 848 184 836 164
-      C823 143 824 117 803 101
-      C783 86 758 91 735 84
-      C711 77 698 59 675 57
-      C652 55 642 78 623 86Z"
-      fill="url(#qatarFill)" stroke="#fff" stroke-width="8" stroke-linejoin="round"/>
-    <path d="M625 107C593 154 579 201 546 231C518 257 511 289 506 333C500 389 468 432 473 490C478 548 507 587 548 616C584 641 618 627 646 595C677 560 680 514 711 482C748 444 767 407 774 360C780 311 808 272 806 225C804 182 771 153 746 127C711 91 661 91 625 107Z" fill="none" stroke="#726b61" stroke-width="2" opacity=".65"/>
-  </g>
-
-  <g fill="none" stroke="#c5a477" stroke-width="3" stroke-linecap="round" opacity=".9">
-    <path d="M744 170C720 222 727 278 748 320C765 355 755 395 729 429"/>
-    <path d="M729 429C700 461 670 491 646 531"/>
-    <path d="M748 320C783 346 811 375 827 414"/>
-  </g>
-
-  <g filter="url(#pinShadow)">
-    <g transform="translate(744 170)">
-      <use href="#locationPin"/>
-      <rect class="label-box" x="22" y="-19" width="78" height="38" rx="19"/>
-      <text class="label" x="38" y="5">Lusail</text>
-    </g>
-    <g transform="translate(748 320)">
-      <use href="#locationPin"/>
-      <rect class="label-box" x="22" y="-19" width="92" height="38" rx="19"/>
-      <text class="label" x="38" y="5">The Pearl</text>
-    </g>
-    <g transform="translate(729 429)">
-      <use href="#locationPin"/>
-      <rect class="label-box" x="-102" y="-19" width="80" height="38" rx="19"/>
-      <text class="label" x="-84" y="5">West Bay</text>
-    </g>
-    <g transform="translate(827 414)">
-      <use href="#locationPin"/>
-      <rect class="label-box" x="22" y="-19" width="73" height="38" rx="19"/>
-      <text class="label" x="38" y="5">Katara</text>
-    </g>
-    <g transform="translate(646 531)">
-      <use href="#locationPin"/>
-      <rect class="label-box" x="-108" y="-19" width="96" height="38" rx="19"/>
-      <text class="label" x="-91" y="5">Msheireb</text>
-    </g>
-    <g transform="translate(573 610)">
-      <use href="#locationPin"/>
-      <rect class="label-box" x="-142" y="-19" width="130" height="38" rx="19"/>
-      <text class="label" x="-126" y="5">Hamad Airport</text>
-    </g>
-    <g transform="translate(535 414)">
-      <use href="#locationPin"/>
-      <rect class="label-box" x="-143" y="-19" width="131" height="38" rx="19"/>
-      <text class="label" x="-126" y="5">Education City</text>
-    </g>
-    <g transform="translate(729 429)">
-      <circle r="22" fill="none" stroke="#c5a477" stroke-width="1.5" opacity=".45"/>
+  <g filter="url(#mapShadow)">
+    <path d="M684 39
+      C660 43 644 60 628 77
+      C609 98 592 111 584 135
+      C575 160 579 184 562 204
+      C544 225 523 238 518 263
+      C513 286 523 304 512 327
+      C502 348 480 361 477 386
+      C473 412 486 430 478 454
+      C469 480 445 493 448 522
+      C450 547 472 562 480 585
+      C488 608 480 630 494 649
+      C508 668 533 669 551 683
+      C571 699 577 724 601 736
+      C624 748 646 738 665 721
+      C685 705 710 701 725 682
+      C740 663 738 639 753 619
+      C769 598 792 587 801 563
+      C809 540 801 516 814 493
+      C826 471 849 456 854 430
+      C860 404 846 382 852 358
+      C858 334 879 316 879 290
+      C879 264 858 248 847 226
+      C836 205 838 180 822 164
+      C806 148 782 151 761 141
+      C740 131 729 108 713 91
+      C699 75 702 49 684 39Z"
+      fill="url(#qatar)" stroke="#c6b9a6" stroke-width="2"/>
+    <path d="M678 67C647 105 637 150 613 181C589 212 563 234 558 280C552 331 531 366 535 416C539 469 514 512 527 564C540 617 568 665 613 690C648 710 679 690 700 656C725 616 731 576 758 538C786 499 804 459 810 415C816 368 839 329 829 283C820 241 785 215 771 178C755 136 728 91 678 67Z" fill="none" stroke="#eee8df" stroke-width="2" opacity=".8"/>
+    <g fill="none" stroke="#eee8df" stroke-width="2" opacity=".85">
+      <path d="M700 101C681 174 693 229 716 279C735 320 729 371 700 417C675 456 658 510 671 568C679 603 673 641 650 680"/>
+      <path d="M591 292C649 300 706 305 774 291"/>
+      <path d="M550 432C618 416 690 423 787 449"/>
+      <path d="M575 558C645 535 706 539 775 565"/>
     </g>
   </g>
 
-  <g transform="translate(76 92)">
-    <text class="small-label" x="0" y="0" letter-spacing="2">QATAR RENTAL</text>
-    <text class="label" x="0" y="30" font-size="22">Chauffeur coverage across Qatar</text>
-    <rect x="0" y="52" width="10" height="10" rx="5" fill="#c5a477"/>
-    <text class="small-label" x="20" y="61">Available service locations</text>
+  <g fill="none" stroke="#f5f0e8" stroke-width="2" opacity=".9">
+    <path d="M760 184C738 239 749 284 765 326C780 365 772 405 744 441"/>
+    <path d="M744 441C711 477 686 518 666 566"/>
+    <path d="M765 326C799 350 822 380 838 416"/>
   </g>
 
-  <g transform="translate(966 602)">
-    <text class="small-label" x="0" y="0" text-anchor="middle" letter-spacing="1.5">DOHA</text>
-    <path d="M-28 14H28" stroke="#c5a477" stroke-width="2" stroke-linecap="round"/>
+  <g filter="url(#labelShadow)">
+    <g transform="translate(758 184)">
+      <use href="#pin"/>
+      <rect x="22" y="-19" width="78" height="38" rx="19" fill="#fff"/>
+      <text class="location" x="40" y="5">Lusail</text>
+    </g>
+    <g transform="translate(765 326)">
+      <use href="#pin"/>
+      <rect x="22" y="-19" width="96" height="38" rx="19" fill="#fff"/>
+      <text class="location" x="39" y="5">The Pearl</text>
+    </g>
+    <g transform="translate(744 441)">
+      <use href="#pin"/>
+      <rect x="-103" y="-19" width="83" height="38" rx="19" fill="#fff"/>
+      <text class="location" x="-84" y="5">West Bay</text>
+    </g>
+    <g transform="translate(838 416)">
+      <use href="#pin"/>
+      <rect x="22" y="-19" width="77" height="38" rx="19" fill="#fff"/>
+      <text class="location" x="40" y="5">Katara</text>
+    </g>
+    <g transform="translate(666 566)">
+      <use href="#pin"/>
+      <rect x="-105" y="-19" width="99" height="38" rx="19" fill="#fff"/>
+      <text class="location" x="-87" y="5">Msheireb</text>
+    </g>
+    <g transform="translate(617 680)">
+      <use href="#pin"/>
+      <rect x="-130" y="-19" width="126" height="38" rx="19" fill="#fff"/>
+      <text class="location" x="-112" y="5">Hamad Airport</text>
+    </g>
+    <g transform="translate(575 425)">
+      <use href="#pin"/>
+      <rect x="-143" y="-19" width="132" height="38" rx="19" fill="#fff"/>
+      <text class="location" x="-125" y="5">Education City</text>
+    </g>
+  </g>
+
+  <g transform="translate(1032 663)">
+    <text class="doha" x="0" y="0">DOHA</text>
+    <path d="M-9 17H52" stroke="#c5a477" stroke-width="2"/>
   </g>
 </svg>
