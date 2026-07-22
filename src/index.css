@@ -98,9 +98,6 @@ a.border-ink:active { transform: translateY(1px) scale(.985); }
 button.bg-ink:disabled,
 a.bg-ink:disabled { transform: none; box-shadow: none; }
 
-main > section:first-child > div:nth-child(2) > div:first-child { display: none !important; }
-main > section:first-child > div:nth-child(2) > div:nth-child(2) { position: static !important; margin-top: 0 !important; }
-
 @media (max-width: 640px) {
   html { scroll-behavior: auto; }
   .input { min-height: 52px; font-size: 16px; }
