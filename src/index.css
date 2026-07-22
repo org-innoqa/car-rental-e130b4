@@ -30,6 +30,73 @@ textarea { min-height: 110px; resize: vertical; }
 article.card.overflow-hidden { position: relative; isolation: isolate; }
 article.card.overflow-hidden > div:first-child > img { position: relative; z-index: 0; background: #fff; object-fit: contain; object-position: center; mix-blend-mode: multiply; filter: saturate(.9) contrast(1.04); }
 article.card.overflow-hidden::after { content: ''; position: absolute; z-index: 2; left: 172px; top: 50%; width: 44px; height: 118px; pointer-events: none; transform: translateY(-45%); background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 160'%3E%3Cellipse cx='32' cy='17' rx='11' ry='13' fill='%23d7aa86'/%3E%3Cpath d='M21 14c1-11 21-14 23 1-5-4-14-5-23-1Z' fill='%23151515'/%3E%3Cpath d='M18 34c5-6 23-6 28 0l-3 49H21l-3-49Z' fill='%231b1b1b'/%3E%3Cpath d='m18 39 14 12 14-12-2-7H20l-2 7Z' fill='%23282828'/%3E%3Cpath d='m28 35 4 8 4-8-4-4-4 4Z' fill='%23f5f5f2'/%3E%3Cpath d='M29 39h6v14h-6z' fill='%23c5a477'/%3E%3Cpath d='M19 39 9 73l7 3 13-27-10-10Zm26 0 10 34-7 3-13-27 10-10Z' fill='%23151515'/%3E%3Cpath d='M22 80h20l5 57H35l-3-34-3 34H17l5-57Z' fill='%23151515'/%3E%3Cpath d='M17 137h15v7H14c-2-3 0-6 3-7Zm18 0h12c4 1 5 4 4 7H34l1-7Z' fill='%23151515'/%3E%3C/svg%3E"); opacity: .98; }
+
+/* Liquid-inspired CTA buttons */
+button.bg-ink,
+a.bg-ink,
+button.border-ink,
+a.border-ink {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 999px;
+  transform: translateZ(0);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background-color .25s ease;
+}
+
+button.bg-ink,
+a.bg-ink {
+  border: 1px solid rgba(255, 255, 255, .18);
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255, 255, 255, .22), transparent 28%),
+    radial-gradient(circle at 88% 110%, rgba(197, 164, 119, .34), transparent 38%),
+    linear-gradient(135deg, #292929 0%, #151515 48%, #24211d 100%);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .16), inset 0 -1px 1px rgba(0, 0, 0, .35), 0 8px 20px rgba(21, 21, 21, .14);
+}
+
+button.border-ink,
+a.border-ink {
+  border-color: rgba(21, 21, 21, .8);
+  background: linear-gradient(135deg, rgba(255, 255, 255, .8), rgba(245, 245, 242, .5));
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .9), 0 5px 14px rgba(21, 21, 21, .06);
+}
+
+button.bg-ink::before,
+a.bg-ink::before,
+button.border-ink::before,
+a.border-ink::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(112deg, transparent 24%, rgba(255, 255, 255, .2) 42%, transparent 58%);
+  transform: translateX(-130%);
+  transition: transform .65s ease;
+}
+
+button.bg-ink:hover,
+a.bg-ink:hover,
+button.border-ink:hover,
+a.border-ink:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .2), 0 12px 26px rgba(21, 21, 21, .18);
+}
+
+button.bg-ink:hover::before,
+a.bg-ink:hover::before,
+button.border-ink:hover::before,
+a.border-ink:hover::before { transform: translateX(130%); }
+
+button.bg-ink:active,
+a.bg-ink:active,
+button.border-ink:active,
+a.border-ink:active { transform: translateY(1px) scale(.985); }
+
+button.bg-ink:disabled,
+a.bg-ink:disabled { transform: none; box-shadow: none; }
+
 main > section:last-child:has(h2) { position: relative; display: flex; flex-direction: column; overflow: hidden; padding-top: 4rem; padding-bottom: 5rem; }
 main > section:last-child:has(h2)::before { content: ''; display: block; order: 3; width: min(100%, 1100px); height: clamp(460px, 52vw, 620px); margin: 2.5rem auto 0; border: 1px solid #e1e1df; border-radius: 24px; background-color: #fff; background-image: url('/qatar-map.svg'); background-position: center; background-repeat: no-repeat; background-size: contain; box-shadow: inset 0 0 0 1px rgba(21, 21, 21, .04); }
 main > section:last-child:has(h2) > p { position: relative; z-index: 1; order: 1; margin: 0; color: #151515; font-size: 1.875rem; font-weight: 600; letter-spacing: -.04em; line-height: 1.2; text-transform: none; }
