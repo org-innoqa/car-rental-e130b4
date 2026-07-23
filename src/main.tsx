@@ -33,6 +33,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
         </main>
       );
     }
+
     return this.props.children;
   }
 }
@@ -107,86 +108,47 @@ function OperationsLogin({ onAuthenticated }: { onAuthenticated: () => void }) {
 
 function AdminGuard({ children }: { children: ReactNode }) {
   const operationsPath = window.location.pathname.replace(/\/$/, '') === '/operations';
-  const [operationsVisible, setOperationsVisible] = useState(false);
   const [authenticated, setAuthenticated] = useState(() => sessionStorage.getItem('qatar-rental-admin') === 'true');
 
   useEffect(() => {
-    document.body.classList.toggle('qr-operations', operationsPath);
+    if (!operationsPath) return;
 
+    document.body.classList.add('qr-operations');
     const style = document.createElement('style');
-    style.textContent = operationsPath
-      ? 'body.qr-operations header, body.qr-operations footer { display: none !important; }'
-      : 'header nav button:last-child, header div.border-t button:last-child { display: none !important; }';
+    style.textContent = 'body.qr-operations header, body.qr-operations footer { display: none !important; }';
     document.head.appendChild(style);
 
-    const addFooterOperationsLink = () => {
-      if (operationsPath) return;
-      const footer = document.querySelector('footer');
-      const footerContent = footer?.firstElementChild;
-      const copyright = footerContent?.querySelector('div.mt-12');
-      if (!copyright || copyright.querySelector('[data-operations-link]')) return;
-
-      copyright.classList.add('flex', 'flex-wrap', 'items-center', 'justify-between', 'gap-4');
-
-      const linkWrapper = document.createElement('div');
-      linkWrapper.setAttribute('data-operations-link', 'true');
-      linkWrapper.className = 'shrink-0';
-
-      const link = document.createElement('a');
-      link.href = '/operations';
-      link.textContent = 'Admin login · Operations';
-      link.className = 'text-xs font-semibold text-stone-400 underline underline-offset-4 transition-colors hover:text-white';
-      link.setAttribute('aria-label', 'Open Qatar Rental admin login and operations page');
-
-      linkWrapper.appendChild(link);
-      copyright.appendChild(linkWrapper);
+    return () => {
+      document.body.classList.remove('qr-operations');
+      style.remove();
     };
+  }, [operationsPath]);
 
-    const openOperations = () => {
-      if (!operationsPath) return;
+  useEffect(() => {
+    if (!operationsPath || !authenticated) return;
+
+    const openDashboard = () => {
       const button = Array.from(document.querySelectorAll('button')).find(item => item.textContent?.trim() === 'Operations');
       if (button) button.click();
     };
 
-    const checkOperationsPage = () => {
-      const text = document.body.innerText;
-      setOperationsVisible(operationsPath && text.includes('Operations dashboard') && text.includes('Internal workspace'));
-    };
-
-    addFooterOperationsLink();
-    const timer = window.setTimeout(() => {
-      addFooterOperationsLink();
-      openOperations();
-    }, 30);
-    checkOperationsPage();
-    const observer = new MutationObserver(() => {
-      addFooterOperationsLink();
-      openOperations();
-      checkOperationsPage();
-    });
-    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
-
-    return () => {
-      window.clearTimeout(timer);
-      observer.disconnect();
-      style.remove();
-      document.body.classList.remove('qr-operations');
-    };
-  }, [operationsPath]);
+    const timer = window.setTimeout(openDashboard, 50);
+    return () => window.clearTimeout(timer);
+  }, [operationsPath, authenticated]);
 
   const signOut = () => {
     sessionStorage.removeItem('qatar-rental-admin');
     setAuthenticated(false);
   };
 
-  if (operationsVisible && !authenticated) {
+  if (operationsPath && !authenticated) {
     return <OperationsLogin onAuthenticated={() => setAuthenticated(true)} />;
   }
 
   return (
     <>
       {children}
-      {operationsVisible && authenticated && (
+      {operationsPath && authenticated && (
         <button type="button" onClick={signOut} className="fixed bottom-5 right-5 z-[90] inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 bg-[#151515] px-4 py-3 text-xs font-semibold text-white shadow-xl">
           <LogOut size={15} />
           Sign out
