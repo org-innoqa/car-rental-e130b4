@@ -119,6 +119,26 @@ function AdminGuard({ children }: { children: ReactNode }) {
       : 'header nav button:last-child, header div.border-t button:last-child { display: none !important; }';
     document.head.appendChild(style);
 
+    const addFooterOperationsLink = () => {
+      if (operationsPath) return;
+      const footer = document.querySelector('footer');
+      const footerContent = footer?.firstElementChild;
+      if (!footerContent || footerContent.querySelector('[data-operations-link]')) return;
+
+      const linkWrapper = document.createElement('div');
+      linkWrapper.setAttribute('data-operations-link', 'true');
+      linkWrapper.className = 'mt-8 border-t border-white/10 pt-5';
+
+      const link = document.createElement('a');
+      link.href = '/operations';
+      link.textContent = 'Admin login · Operations';
+      link.className = 'text-xs font-semibold text-stone-400 underline underline-offset-4 transition-colors hover:text-white';
+      link.setAttribute('aria-label', 'Open Qatar Rental admin login and operations page');
+
+      linkWrapper.appendChild(link);
+      footerContent.appendChild(linkWrapper);
+    };
+
     const openOperations = () => {
       if (!operationsPath) return;
       const button = Array.from(document.querySelectorAll('button')).find(item => item.textContent?.trim() === 'Operations');
@@ -130,9 +150,14 @@ function AdminGuard({ children }: { children: ReactNode }) {
       setOperationsVisible(operationsPath && text.includes('Operations dashboard') && text.includes('Internal workspace'));
     };
 
-    const timer = window.setTimeout(openOperations, 30);
+    addFooterOperationsLink();
+    const timer = window.setTimeout(() => {
+      addFooterOperationsLink();
+      openOperations();
+    }, 30);
     checkOperationsPage();
     const observer = new MutationObserver(() => {
+      addFooterOperationsLink();
       openOperations();
       checkOperationsPage();
     });
