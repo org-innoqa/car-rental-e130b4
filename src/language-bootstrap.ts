@@ -148,8 +148,21 @@ function translateText(value: string) {
 
 function placeControl() {
   const button = document.querySelector<HTMLElement>('[data-language-control]');
+  const desktopNav = document.querySelector<HTMLElement>('header nav');
+  const manageBooking = desktopNav
+    ? Array.from(desktopNav.querySelectorAll<HTMLButtonElement>('button')).find(item => {
+        const label = item.textContent?.trim().toLowerCase() || '';
+        return label === 'manage booking' || label === 'إدارة الحجز';
+      })
+    : null;
+
+  if (button && manageBooking && button.parentElement !== desktopNav) {
+    manageBooking.insertAdjacentElement('afterend', button);
+    return;
+  }
+
   const headerInner = document.querySelector<HTMLElement>('header > div > div');
-  if (button && headerInner && button.parentElement !== headerInner) headerInner.appendChild(button);
+  if (button && headerInner && button.parentElement !== headerInner && !desktopNav) headerInner.appendChild(button);
 }
 
 function updateLanguage() {
