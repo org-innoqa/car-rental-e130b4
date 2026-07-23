@@ -4,70 +4,35 @@ import { Loader2, Lock, LogIn, LogOut, ShieldCheck } from 'lucide-react';
 import App from './App';
 import { db } from './lib/db';
 
-type ErrorBoundaryProps = {
-  children: ReactNode;
-};
-
-type ErrorBoundaryState = {
-  hasError: boolean;
-  error: Error | null;
-};
+type ErrorBoundaryProps = { children: ReactNode };
+type ErrorBoundaryState = { hasError: boolean; error: Error | null };
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  state: ErrorBoundaryState = {
-    hasError: false,
-    error: null,
-  };
+  state: ErrorBoundaryState = { hasError: false, error: null };
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return {
-      hasError: true,
-      error,
-    };
+    return { hasError: true, error };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('Qatar Rental application error:', error, errorInfo);
   }
 
-  handleReload = () => {
-    window.location.reload();
-  };
-
   render() {
     if (this.state.hasError) {
       return (
         <main className="flex min-h-screen items-center justify-center bg-[#f5f5f2] px-5 py-12 text-[#151515]">
           <section className="w-full max-w-lg rounded-2xl border border-[#e4e3df] bg-white p-8 text-center shadow-sm sm:p-10">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#151515] text-sm font-bold text-white">
-              QR
-            </div>
-            <p className="mt-7 text-xs font-semibold uppercase tracking-[.18em] text-[#a88b60]">
-              Qatar Rental
-            </p>
-            <h1 className="mt-3 font-display text-3xl font-semibold">
-              We are refreshing the experience.
-            </h1>
-            <p className="mt-4 text-sm leading-6 text-stone-500">
-              Something prevented the page from loading correctly. Please reload the page to try again.
-            </p>
-            <button
-              type="button"
-              onClick={this.handleReload}
-              className="mt-7 min-h-12 rounded-lg bg-[#151515] px-6 py-3 text-sm font-semibold text-white"
-            >
-              Reload page
-            </button>
-            {this.state.error?.message && (
-              <p className="mt-6 break-words text-left text-xs leading-5 text-stone-400">
-                Error: {this.state.error.message}
-              </p>
-            )}
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#151515] text-sm font-bold text-white">QR</div>
+            <p className="mt-7 text-xs font-semibold uppercase tracking-[.18em] text-[#a88b60]">Qatar Rental</p>
+            <h1 className="mt-3 font-display text-3xl font-semibold">We are refreshing the experience.</h1>
+            <p className="mt-4 text-sm leading-6 text-stone-500">Something prevented the page from loading correctly. Please reload the page to try again.</p>
+            <button type="button" onClick={() => window.location.reload()} className="mt-7 min-h-12 rounded-lg bg-[#151515] px-6 py-3 text-sm font-semibold text-white">Reload page</button>
+            {this.state.error?.message && <p className="mt-6 break-words text-left text-xs leading-5 text-stone-400">Error: {this.state.error.message}</p>}
           </section>
         </main>
       );
     }
-
     return this.props.children;
   }
 }
@@ -104,65 +69,36 @@ function OperationsLogin({ onAuthenticated }: { onAuthenticated: () => void }) {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#f5f5f2] px-5 py-10 text-[#151515]">
-      <section className="w-full max-w-md rounded-2xl border border-[#e4e3df] bg-white p-7 shadow-sm sm:p-10">
+    <main className="flex min-h-screen items-center justify-center bg-[#171717] px-5 py-10 text-[#151515]">
+      <section className="w-full max-w-md rounded-2xl border border-[#e4e3df] bg-white p-7 shadow-2xl sm:p-10">
         <div className="flex items-center justify-between">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#151515] text-sm font-bold text-white">
-            QR
-          </div>
-          <a href="/" className="text-xs font-semibold text-stone-500 underline underline-offset-4">
-            Return to website
-          </a>
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#151515] text-sm font-bold text-white">QR</div>
+          <a href="/" className="text-xs font-semibold text-stone-500 underline underline-offset-4">Return to website</a>
         </div>
-        <p className="mt-8 text-xs font-semibold uppercase tracking-[.18em] text-[#a88b60]">
-          Restricted access
-        </p>
-        <h1 className="mt-3 font-display text-3xl font-semibold">Operations sign in</h1>
-        <p className="mt-3 text-sm leading-6 text-stone-500">
-          Sign in to manage booking requests, vehicle operations and the chauffeur team.
-        </p>
+        <p className="mt-8 text-xs font-semibold uppercase tracking-[.18em] text-[#a88b60]">Qatar Rental Operations</p>
+        <h1 className="mt-3 font-display text-3xl font-semibold">Admin sign in</h1>
+        <p className="mt-3 text-sm leading-6 text-stone-500">Sign in to manage booking requests, fleet operations and chauffeur assignments.</p>
         <form onSubmit={signIn} className="mt-7 space-y-5">
           <div>
             <label className="label" htmlFor="admin-email">Email address</label>
-            <input
-              id="admin-email"
-              className="input"
-              type="email"
-              value={email}
-              onChange={event => setEmail(event.target.value)}
-              autoComplete="username"
-              required
-            />
+            <input id="admin-email" className="input" type="email" value={email} onChange={event => setEmail(event.target.value)} autoComplete="username" required />
           </div>
           <div>
             <label className="label" htmlFor="admin-password">Password</label>
             <div className="relative">
               <Lock size={16} className="absolute left-3 top-4 text-stone-400" />
-              <input
-                id="admin-password"
-                className="input pl-10"
-                type="password"
-                value={password}
-                onChange={event => setPassword(event.target.value)}
-                autoComplete="current-password"
-                placeholder="Enter your password"
-                required
-              />
+              <input id="admin-password" className="input pl-10" type="password" value={password} onChange={event => setPassword(event.target.value)} autoComplete="current-password" placeholder="Enter your password" required />
             </div>
           </div>
           {error && <p className="text-sm text-red-600">{error}</p>}
-          <button
-            type="submit"
-            disabled={loading}
-            className="flex min-h-13 w-full items-center justify-center gap-2 rounded-lg bg-ink px-5 py-4 text-sm font-semibold text-white disabled:opacity-50"
-          >
+          <button type="submit" disabled={loading} className="flex min-h-13 w-full items-center justify-center gap-2 rounded-lg bg-ink px-5 py-4 text-sm font-semibold text-white disabled:opacity-50">
             {loading ? <Loader2 size={17} className="animate-spin" /> : <LogIn size={17} />}
-            {loading ? 'Verifying account...' : 'Sign in to operations'}
+            {loading ? 'Verifying account...' : 'Sign in'}
           </button>
         </form>
         <div className="mt-6 flex gap-3 rounded-xl bg-mist p-4 text-xs leading-5 text-stone-500">
           <ShieldCheck size={17} className="mt-0.5 shrink-0 text-sand" />
-          <span>Administrator access is required for booking and fleet operations.</span>
+          <span>This area is restricted to authorized Qatar Rental administrators.</span>
         </div>
       </section>
     </main>
@@ -170,20 +106,45 @@ function OperationsLogin({ onAuthenticated }: { onAuthenticated: () => void }) {
 }
 
 function AdminGuard({ children }: { children: ReactNode }) {
+  const operationsPath = window.location.pathname.replace(/\/$/, '') === '/operations';
   const [operationsVisible, setOperationsVisible] = useState(false);
   const [authenticated, setAuthenticated] = useState(() => sessionStorage.getItem('qatar-rental-admin') === 'true');
 
   useEffect(() => {
-    const checkOperationsPage = () => {
-      const text = document.body.innerText;
-      setOperationsVisible(text.includes('Operations dashboard') && text.includes('Internal workspace'));
+    document.body.classList.toggle('qr-operations', operationsPath);
+
+    const style = document.createElement('style');
+    style.textContent = operationsPath
+      ? 'body.qr-operations header, body.qr-operations footer { display: none !important; }'
+      : 'header nav button:last-child, header div.border-t button:last-child { display: none !important; }';
+    document.head.appendChild(style);
+
+    const openOperations = () => {
+      if (!operationsPath) return;
+      const button = Array.from(document.querySelectorAll('button')).find(item => item.textContent?.trim() === 'Operations');
+      if (button) button.click();
     };
 
+    const checkOperationsPage = () => {
+      const text = document.body.innerText;
+      setOperationsVisible(operationsPath && text.includes('Operations dashboard') && text.includes('Internal workspace'));
+    };
+
+    const timer = window.setTimeout(openOperations, 30);
     checkOperationsPage();
-    const observer = new MutationObserver(checkOperationsPage);
+    const observer = new MutationObserver(() => {
+      openOperations();
+      checkOperationsPage();
+    });
     observer.observe(document.body, { childList: true, subtree: true, characterData: true });
-    return () => observer.disconnect();
-  }, []);
+
+    return () => {
+      window.clearTimeout(timer);
+      observer.disconnect();
+      style.remove();
+      document.body.classList.remove('qr-operations');
+    };
+  }, [operationsPath]);
 
   const signOut = () => {
     sessionStorage.removeItem('qatar-rental-admin');
@@ -198,11 +159,7 @@ function AdminGuard({ children }: { children: ReactNode }) {
     <>
       {children}
       {operationsVisible && authenticated && (
-        <button
-          type="button"
-          onClick={signOut}
-          className="fixed bottom-5 right-5 z-[90] inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 bg-[#151515] px-4 py-3 text-xs font-semibold text-white shadow-xl"
-        >
+        <button type="button" onClick={signOut} className="fixed bottom-5 right-5 z-[90] inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 bg-[#151515] px-4 py-3 text-xs font-semibold text-white shadow-xl">
           <LogOut size={15} />
           Sign out
         </button>
