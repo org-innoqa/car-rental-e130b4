@@ -146,6 +146,26 @@ function translateText(value: string) {
     .replace(/QAR /g, 'ريال قطري ');
 }
 
+function placeControl() {
+  const button = document.querySelector<HTMLElement>('[data-language-control]');
+  const headerInner = document.querySelector<HTMLElement>('header > div > div');
+  if (button && headerInner && button.parentElement !== headerInner) headerInner.appendChild(button);
+}
+
+function updateLanguage() {
+  document.documentElement.lang = arabic ? 'ar' : 'en';
+  document.documentElement.dir = arabic ? 'rtl' : 'ltr';
+  document.body.classList.toggle('language-arabic', arabic);
+  const button = document.querySelector<HTMLElement>('[data-language-control]');
+  if (button) {
+    button.innerHTML = '<span aria-hidden="true">🇶🇦</span><span class="language-divider" aria-hidden="true">/</span><span aria-hidden="true">🇺🇸</span>';
+    button.setAttribute('aria-label', arabic ? 'Switch to English' : 'Switch to Arabic');
+    button.title = arabic ? 'English' : 'العربية';
+  }
+  placeControl();
+  translateElement();
+}
+
 function translateElement(root: ParentNode = document.body) {
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   const nodes: Text[] = [];
@@ -164,21 +184,12 @@ function translateElement(root: ParentNode = document.body) {
   });
 }
 
-function updateLanguage() {
-  document.documentElement.lang = arabic ? 'ar' : 'en';
-  document.documentElement.dir = arabic ? 'rtl' : 'ltr';
-  document.body.classList.toggle('language-arabic', arabic);
-  const button = document.querySelector<HTMLElement>('[data-language-control]');
-  if (button) button.textContent = arabic ? 'English' : 'العربية';
-  translateElement();
-}
-
 function createControl() {
   if (document.querySelector('[data-language-control]')) return;
   const button = document.createElement('button');
   button.type = 'button';
   button.dataset.languageControl = 'true';
-  button.setAttribute('aria-label', 'Change language');
+  button.className = 'language-switcher';
   button.addEventListener('click', () => {
     arabic = !arabic;
     localStorage.setItem('qatar-rental-language', arabic ? 'ar' : 'en');
@@ -193,6 +204,7 @@ function start() {
   observer = new MutationObserver(() => {
     if (!document.body.dataset.translating) {
       document.body.dataset.translating = 'true';
+      placeControl();
       translateElement();
       delete document.body.dataset.translating;
     }

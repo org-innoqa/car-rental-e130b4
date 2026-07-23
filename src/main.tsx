@@ -45,7 +45,7 @@ function AdminGuard({ children }: { children: ReactNode }) {
     const update = () => {
       document.querySelectorAll('header button').forEach(button => { const label = button.textContent?.trim().toLowerCase() || ''; if (label === 'operations' || label === 'operations dashboard' || label === 'العمليات' || label === 'لوحة العمليات') button.classList.add('qr-hidden-operations'); });
       const copyright = document.querySelector('footer .mt-12.border-t');
-      if (copyright && !copyright.querySelector('.qr-admin-link')) { const link = document.createElement('a'); link.href = '/operations'; link.className = 'qr-admin-link ml-3 inline-block'; link.textContent = 'Admin operations · Sign in'; copyright.appendChild(link); }
+      if (copyright && !copyright.querySelector('.qr-admin-link')) { const link = document.createElement('a'); link.href = '/operations'; link.className = 'qr-admin-link ml-3 inline-block'; link.textContent = 'Admin - Operations'; copyright.appendChild(link); }
     };
     update(); const observer = new MutationObserver(update); observer.observe(document.body, { childList: true, subtree: true });
     return () => { observer.disconnect(); document.head.removeChild(style); };
