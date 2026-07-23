@@ -1,6 +1,6 @@
 import React, { Component, type ErrorInfo, type ReactNode, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import { Loader2, LockKeyhole, LogOut, ShieldCheck } from 'lucide-react';
+import { Loader2, Lock, LogOut, ShieldCheck } from 'lucide-react';
 import App from './App';
 import { db } from './lib/db';
 
@@ -163,7 +163,7 @@ function AdminGuard({ children }: { children: ReactNode }) {
               <div>
                 <label className="label" htmlFor="admin-password">Password</label>
                 <div className="relative">
-                  <LockKeyhole size={16} className="absolute left-3 top-4 text-stone-400" />
+                  <Lock size={16} className="absolute left-3 top-4 text-stone-400" />
                   <input
                     id="admin-password"
                     className="input pl-10"
