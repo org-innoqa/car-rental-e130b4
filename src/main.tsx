@@ -111,6 +111,43 @@ function AdminGuard({ children }: { children: ReactNode }) {
   const [authenticated, setAuthenticated] = useState(() => sessionStorage.getItem('qatar-rental-admin') === 'true');
 
   useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      header button.qr-hidden-operations { display: none !important; }
+      footer .qr-admin-link { color: #a8a39a; text-decoration: underline; text-underline-offset: 3px; transition: color .2s ease; }
+      footer .qr-admin-link:hover { color: #c5a477; }
+    `;
+    document.head.appendChild(style);
+
+    const updateWebsiteChrome = () => {
+      document.querySelectorAll('header button').forEach(button => {
+        const label = button.textContent?.trim().toLowerCase() || '';
+        if (label === 'operations' || label === 'operations dashboard') {
+          button.classList.add('qr-hidden-operations');
+        }
+      });
+
+      const copyright = document.querySelector('footer .mt-12.border-t');
+      if (copyright && !copyright.querySelector('.qr-admin-link')) {
+        const link = document.createElement('a');
+        link.href = '/operations';
+        link.className = 'qr-admin-link ml-3 inline-block';
+        link.textContent = 'Admin operations · Sign in';
+        copyright.appendChild(link);
+      }
+    };
+
+    updateWebsiteChrome();
+    const observer = new MutationObserver(updateWebsiteChrome);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      observer.disconnect();
+      document.head.removeChild(style);
+    };
+  }, []);
+
+  useEffect(() => {
     if (!operationsPath) return;
 
     document.body.classList.add('qr-operations');
