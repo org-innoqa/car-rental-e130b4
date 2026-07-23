@@ -123,11 +123,14 @@ function AdminGuard({ children }: { children: ReactNode }) {
       if (operationsPath) return;
       const footer = document.querySelector('footer');
       const footerContent = footer?.firstElementChild;
-      if (!footerContent || footerContent.querySelector('[data-operations-link]')) return;
+      const copyright = footerContent?.querySelector('div.mt-12');
+      if (!copyright || copyright.querySelector('[data-operations-link]')) return;
+
+      copyright.classList.add('flex', 'flex-wrap', 'items-center', 'justify-between', 'gap-4');
 
       const linkWrapper = document.createElement('div');
       linkWrapper.setAttribute('data-operations-link', 'true');
-      linkWrapper.className = 'mt-8 border-t border-white/10 pt-5';
+      linkWrapper.className = 'shrink-0';
 
       const link = document.createElement('a');
       link.href = '/operations';
@@ -136,7 +139,7 @@ function AdminGuard({ children }: { children: ReactNode }) {
       link.setAttribute('aria-label', 'Open Qatar Rental admin login and operations page');
 
       linkWrapper.appendChild(link);
-      footerContent.appendChild(linkWrapper);
+      copyright.appendChild(linkWrapper);
     };
 
     const openOperations = () => {
