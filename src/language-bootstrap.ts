@@ -131,6 +131,8 @@ const translations: Record<string, string> = {
 
 let arabic = localStorage.getItem('qatar-rental-language') === 'ar';
 let observer: MutationObserver | null = null;
+let translating = false;
+const originalText = new WeakMap<Text, string>();
 
 function translateText(value: string) {
   if (!arabic) return value;
@@ -169,36 +171,61 @@ function updateLanguage() {
   document.documentElement.lang = arabic ? 'ar' : 'en';
   document.documentElement.dir = arabic ? 'rtl' : 'ltr';
   document.body.classList.toggle('language-arabic', arabic);
+
   const button = document.querySelector<HTMLElement>('[data-language-control]');
   if (button) {
-    button.innerHTML = '<span aria-hidden="true">🇶🇦</span><span class="language-divider" aria-hidden="true">/</span><span aria-hidden="true">🇺🇸</span>';
+    const flag = arabic ? '🇶🇦' : '🇺🇸';
+    const code = arabic ? 'QA' : 'US';
+    button.innerHTML = `<span class="language-flag" aria-hidden="true">${flag}</span><span class="language-code" aria-hidden="true">${code}</span>`;
     button.setAttribute('aria-label', arabic ? 'Switch to English' : 'Switch to Arabic');
     button.title = arabic ? 'English' : 'العربية';
   }
+
   placeControl();
   translateElement();
 }
 
 function translateElement(root: ParentNode = document.body) {
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-  const nodes: Text[] = [];
-  let node: Node | null;
-  while ((node = walker.nextNode())) nodes.push(node as Text);
-  nodes.forEach(text => {
-    if (text.parentElement?.closest('[data-language-control]')) return;
-    const original = text.textContent || '';
-    const translated = translateText(original.trim());
-    if (translated !== original.trim()) text.textContent = original.replace(original.trim(), translated);
-  });
-  document.querySelectorAll<HTMLElement>('input, textarea').forEach(input => {
-    const original = input.dataset.originalPlaceholder || input.placeholder;
-    if (!input.dataset.originalPlaceholder) input.dataset.originalPlaceholder = original;
-    input.placeholder = arabic ? translateText(original) : input.dataset.originalPlaceholder;
-  });
+  if (translating) return;
+  translating = true;
+
+  try {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const nodes: Text[] = [];
+    let node: Node | null;
+
+    while ((node = walker.nextNode())) {
+      const text = node as Text;
+      if (text.parentElement?.closest('[data-language-control]')) continue;
+      nodes.push(text);
+    }
+
+    nodes.forEach(text => {
+      const current = text.textContent || '';
+      const original = originalText.get(text) ?? current;
+      originalText.set(text, original);
+      const trimmed = original.trim();
+      if (!trimmed) return;
+
+      const translated = translateText(trimmed);
+      const nextValue = original.replace(trimmed, translated);
+      if (current !== nextValue) text.textContent = nextValue;
+    });
+
+    document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea').forEach(input => {
+      const original = input.dataset.originalPlaceholder ?? input.placeholder;
+      input.dataset.originalPlaceholder = original;
+      const nextPlaceholder = arabic ? translateText(original) : original;
+      if (input.placeholder !== nextPlaceholder) input.placeholder = nextPlaceholder;
+    });
+  } finally {
+    translating = false;
+  }
 }
 
 function createControl() {
   if (document.querySelector('[data-language-control]')) return;
+
   const button = document.createElement('button');
   button.type = 'button';
   button.dataset.languageControl = 'true';
@@ -214,14 +241,15 @@ function createControl() {
 function start() {
   createControl();
   updateLanguage();
+
   observer = new MutationObserver(() => {
-    if (!document.body.dataset.translating) {
-      document.body.dataset.translating = 'true';
-      placeControl();
-      translateElement();
-      delete document.body.dataset.translating;
-    }
+    if (translating || document.body.dataset.translating) return;
+    document.body.dataset.translating = 'true';
+    placeControl();
+    translateElement();
+    delete document.body.dataset.translating;
   });
+
   observer.observe(document.body, { childList: true, subtree: true });
 }
 
