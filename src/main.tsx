@@ -1,3 +1,4 @@
+import './index.css';
 import './language-bootstrap';
 import React, { Component, type ErrorInfo, type ReactNode, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
