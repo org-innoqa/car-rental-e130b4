@@ -148,11 +148,27 @@ function translateText(value: string) {
     .replace(/QAR /g, 'ريال قطري ');
 }
 
+function removeServiceNavigationItems() {
+  const serviceLabels = new Set([
+    'airport transfers',
+    'hourly chauffeur',
+    'خدمات النقل من وإلى المطار',
+    'سائق بالساعة'
+  ]);
+
+  document.querySelectorAll<HTMLElement>('header nav a, header nav button').forEach(item => {
+    const label = item.textContent?.replace(/\s+/g, ' ').trim().toLowerCase() || '';
+    if (serviceLabels.has(label)) item.remove();
+  });
+}
+
 function placeControl() {
+  removeServiceNavigationItems();
+
   const button = document.querySelector<HTMLElement>('[data-language-control]');
   const desktopNav = document.querySelector<HTMLElement>('header nav');
   const manageBooking = desktopNav
-    ? Array.from(desktopNav.querySelectorAll<HTMLButtonElement>('button')).find(item => {
+    ? Array.from(desktopNav.querySelectorAll<HTMLButtonElement>('button, a')).find(item => {
         const label = item.textContent?.trim().toLowerCase() || '';
         return label === 'manage booking' || label === 'إدارة الحجز';
       })
@@ -295,6 +311,7 @@ function start() {
   observer = new MutationObserver(() => {
     if (translating || document.body.dataset.translating) return;
     document.body.dataset.translating = 'true';
+    removeServiceNavigationItems();
     placeControl();
     translateElement();
     delete document.body.dataset.translating;
