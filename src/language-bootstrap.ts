@@ -167,6 +167,54 @@ function placeControl() {
   if (button && headerInner && button.parentElement !== headerInner && !desktopNav) headerInner.appendChild(button);
 }
 
+function addLiquidButtonStyles() {
+  if (document.getElementById('qatar-rental-liquid-button-styles')) return;
+
+  const style = document.createElement('style');
+  style.id = 'qatar-rental-liquid-button-styles';
+  style.textContent = `
+    .language-switcher.liquid-language-switcher {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .58) !important;
+      border-radius: 999px !important;
+      background: linear-gradient(135deg, rgba(255,255,255,.76), rgba(232,239,244,.32)) !important;
+      box-shadow: inset 0 1px 1px rgba(255,255,255,.9), 0 8px 24px rgba(36,43,48,.12) !important;
+      backdrop-filter: blur(16px) saturate(145%);
+      -webkit-backdrop-filter: blur(16px) saturate(145%);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .language-switcher.liquid-language-switcher::before {
+      position: absolute;
+      top: -55%;
+      left: 8%;
+      width: 48%;
+      height: 130%;
+      border-radius: 999px;
+      background: rgba(255,255,255,.62);
+      content: '';
+      filter: blur(12px);
+      opacity: .72;
+      pointer-events: none;
+      transform: rotate(-24deg);
+    }
+    .language-switcher.liquid-language-switcher > * {
+      position: relative;
+      z-index: 1;
+    }
+    .language-switcher.liquid-language-switcher:hover {
+      background: linear-gradient(135deg, rgba(255,255,255,.9), rgba(214,226,234,.5)) !important;
+      box-shadow: inset 0 1px 1px rgba(255,255,255,.95), 0 12px 30px rgba(36,43,48,.18) !important;
+      transform: translateY(-1px);
+    }
+    .language-switcher.liquid-language-switcher:active {
+      transform: translateY(0) scale(.97);
+    }
+  `;
+  document.head.appendChild(style);
+}
+
 function updateLanguage() {
   document.documentElement.lang = arabic ? 'ar' : 'en';
   document.documentElement.dir = arabic ? 'rtl' : 'ltr';
@@ -226,10 +274,12 @@ function translateElement(root: ParentNode = document.body) {
 function createControl() {
   if (document.querySelector('[data-language-control]')) return;
 
+  addLiquidButtonStyles();
+
   const button = document.createElement('button');
   button.type = 'button';
   button.dataset.languageControl = 'true';
-  button.className = 'language-switcher';
+  button.className = 'language-switcher liquid-language-switcher';
   button.addEventListener('click', () => {
     arabic = !arabic;
     localStorage.setItem('qatar-rental-language', arabic ? 'ar' : 'en');
