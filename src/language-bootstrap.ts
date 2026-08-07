@@ -193,42 +193,70 @@ function addLiquidButtonStyles() {
       position: relative;
       isolation: isolate;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, .62) !important;
+      min-height: 42px;
+      border: 1px solid rgba(255, 255, 255, .7) !important;
       border-radius: 999px !important;
-      background: linear-gradient(135deg, rgba(255,255,255,.82), rgba(220,230,236,.42)) !important;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.9), rgba(229,237,242,.48)) padding-box,
+        linear-gradient(135deg, rgba(255,255,255,.95), rgba(174,190,199,.52)) border-box !important;
       color: #292725 !important;
-      box-shadow: inset 0 1px 1px rgba(255,255,255,.95), 0 8px 24px rgba(36,43,48,.12) !important;
-      backdrop-filter: blur(16px) saturate(145%);
-      -webkit-backdrop-filter: blur(16px) saturate(145%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.98),
+        inset 0 -1px 0 rgba(151,166,174,.12),
+        0 8px 24px rgba(36,43,48,.12) !important;
+      backdrop-filter: blur(18px) saturate(155%);
+      -webkit-backdrop-filter: blur(18px) saturate(155%);
       transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
     }
     button:not([data-language-control])::before {
       position: absolute;
-      top: -60%;
-      left: 8%;
+      top: -75%;
+      left: 7%;
       width: 48%;
-      height: 140%;
+      height: 155%;
       border-radius: 999px;
-      background: rgba(255,255,255,.58);
+      background: linear-gradient(90deg, rgba(255,255,255,.82), rgba(255,255,255,0));
       content: '';
-      filter: blur(13px);
-      opacity: .74;
+      filter: blur(14px);
+      opacity: .78;
       pointer-events: none;
       transform: rotate(-24deg);
+      transition: opacity .25s ease, transform .35s ease;
+    }
+    button:not([data-language-control])::after {
+      position: absolute;
+      inset: 1px;
+      border: 1px solid rgba(255,255,255,.34);
+      border-radius: inherit;
+      content: '';
+      pointer-events: none;
     }
     button:not([data-language-control]) > * {
       position: relative;
       z-index: 1;
     }
     button:not([data-language-control]):hover:not(:disabled) {
-      background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(205,220,230,.58)) !important;
-      border-color: rgba(255, 255, 255, .88) !important;
-      box-shadow: inset 0 1px 1px rgba(255,255,255,1), 0 12px 30px rgba(36,43,48,.18) !important;
-      transform: translateY(-1px);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.98), rgba(213,226,234,.66)) padding-box,
+        linear-gradient(135deg, rgba(255,255,255,1), rgba(150,174,185,.7)) border-box !important;
+      border-color: rgba(255,255,255,.94) !important;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,1),
+        0 14px 34px rgba(36,43,48,.18),
+        0 0 0 4px rgba(255,255,255,.14) !important;
+      transform: translateY(-2px);
+    }
+    button:not([data-language-control]):hover:not(:disabled)::before {
+      opacity: .95;
+      transform: translate(12px, -2px) rotate(-24deg);
+    }
+    button:not([data-language-control]):focus-visible {
+      outline: 3px solid rgba(197,164,119,.5);
+      outline-offset: 3px;
     }
     button:not([data-language-control]):active:not(:disabled) {
       transform: translateY(0) scale(.97);
-      box-shadow: inset 0 2px 4px rgba(36,43,48,.12), 0 4px 12px rgba(36,43,48,.1) !important;
+      box-shadow: inset 0 2px 5px rgba(36,43,48,.14), 0 4px 12px rgba(36,43,48,.1) !important;
     }
     button:not([data-language-control]):disabled {
       cursor: not-allowed;
@@ -239,25 +267,28 @@ function addLiquidButtonStyles() {
       position: relative;
       isolation: isolate;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, .58) !important;
+      min-height: 38px;
+      border: 1px solid rgba(255, 255, 255, .68) !important;
       border-radius: 999px !important;
-      background: linear-gradient(135deg, rgba(255,255,255,.76), rgba(232,239,244,.32)) !important;
-      box-shadow: inset 0 1px 1px rgba(255,255,255,.9), 0 8px 24px rgba(36,43,48,.12) !important;
-      backdrop-filter: blur(16px) saturate(145%);
-      -webkit-backdrop-filter: blur(16px) saturate(145%);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.82), rgba(232,239,244,.38)) padding-box,
+        linear-gradient(135deg, rgba(255,255,255,.95), rgba(174,190,199,.5)) border-box !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.94), 0 8px 24px rgba(36,43,48,.12) !important;
+      backdrop-filter: blur(18px) saturate(155%);
+      -webkit-backdrop-filter: blur(18px) saturate(155%);
       transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
     }
     .language-switcher.liquid-language-switcher::before {
       position: absolute;
-      top: -55%;
+      top: -65%;
       left: 8%;
       width: 48%;
-      height: 130%;
+      height: 140%;
       border-radius: 999px;
-      background: rgba(255,255,255,.62);
+      background: rgba(255,255,255,.66);
       content: '';
-      filter: blur(12px);
-      opacity: .72;
+      filter: blur(13px);
+      opacity: .76;
       pointer-events: none;
       transform: rotate(-24deg);
     }
@@ -266,9 +297,15 @@ function addLiquidButtonStyles() {
       z-index: 1;
     }
     .language-switcher.liquid-language-switcher:hover {
-      background: linear-gradient(135deg, rgba(255,255,255,.9), rgba(214,226,234,.5)) !important;
-      box-shadow: inset 0 1px 1px rgba(255,255,255,.95), 0 12px 30px rgba(36,43,48,.18) !important;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.95), rgba(214,226,234,.56)) padding-box,
+        linear-gradient(135deg, rgba(255,255,255,1), rgba(150,174,185,.66)) border-box !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,1), 0 12px 30px rgba(36,43,48,.18) !important;
       transform: translateY(-1px);
+    }
+    .language-switcher.liquid-language-switcher:focus-visible {
+      outline: 3px solid rgba(197,164,119,.5);
+      outline-offset: 3px;
     }
     .language-switcher.liquid-language-switcher:active {
       transform: translateY(0) scale(.97);
