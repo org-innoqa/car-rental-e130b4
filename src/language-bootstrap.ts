@@ -44,7 +44,7 @@ const translations: Record<string, string> = {
   'Recommended': 'موصى به',
   'Most Popular': 'الأكثر شعبية',
   'Price: Low to High': 'السعر: من الأقل إلى الأعلى',
-  'Price: High to Low': 'السعر: من الأعلى إلى الأقل',
+  'Price: High to Low': 'السعر: من الأعلى إلى الأعلى',
   'Passenger Capacity': 'سعة الركاب',
   'View details': 'عرض التفاصيل',
   'Request booking': 'طلب حجز',
@@ -189,6 +189,52 @@ function addLiquidButtonStyles() {
   const style = document.createElement('style');
   style.id = 'qatar-rental-liquid-button-styles';
   style.textContent = `
+    button:not([data-language-control]) {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .62) !important;
+      border-radius: 999px !important;
+      background: linear-gradient(135deg, rgba(255,255,255,.82), rgba(220,230,236,.42)) !important;
+      color: #292725 !important;
+      box-shadow: inset 0 1px 1px rgba(255,255,255,.95), 0 8px 24px rgba(36,43,48,.12) !important;
+      backdrop-filter: blur(16px) saturate(145%);
+      -webkit-backdrop-filter: blur(16px) saturate(145%);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+    }
+    button:not([data-language-control])::before {
+      position: absolute;
+      top: -60%;
+      left: 8%;
+      width: 48%;
+      height: 140%;
+      border-radius: 999px;
+      background: rgba(255,255,255,.58);
+      content: '';
+      filter: blur(13px);
+      opacity: .74;
+      pointer-events: none;
+      transform: rotate(-24deg);
+    }
+    button:not([data-language-control]) > * {
+      position: relative;
+      z-index: 1;
+    }
+    button:not([data-language-control]):hover:not(:disabled) {
+      background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(205,220,230,.58)) !important;
+      border-color: rgba(255, 255, 255, .88) !important;
+      box-shadow: inset 0 1px 1px rgba(255,255,255,1), 0 12px 30px rgba(36,43,48,.18) !important;
+      transform: translateY(-1px);
+    }
+    button:not([data-language-control]):active:not(:disabled) {
+      transform: translateY(0) scale(.97);
+      box-shadow: inset 0 2px 4px rgba(36,43,48,.12), 0 4px 12px rgba(36,43,48,.1) !important;
+    }
+    button:not([data-language-control]):disabled {
+      cursor: not-allowed;
+      opacity: .55;
+      filter: saturate(.7);
+    }
     .language-switcher.liquid-language-switcher {
       position: relative;
       isolation: isolate;
